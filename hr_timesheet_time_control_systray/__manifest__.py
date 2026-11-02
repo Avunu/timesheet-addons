@@ -7,7 +7,7 @@
     "version": "18.0.1.0.0",
     "category": "Human Resources/Timesheets",
     "author": "Avunu LLC",
-    "website": "https://avu.nu",
+    "website": "https://github.com/Avunu/timesheet-addons",
     "license": "AGPL-3",
     # project_timesheet_time_control owns the notion of a running timer (an
     # analytic line with no duration yet); bus carries the change notification
