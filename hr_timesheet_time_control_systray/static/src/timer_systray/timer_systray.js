@@ -1,15 +1,15 @@
 // Copyright 2026 Avunu LLC (avu.nu)
 // License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-import { Component, onWillDestroy, useExternalListener, useState } from "@odoo/owl";
-import { Dropdown } from "@web/core/dropdown/dropdown";
-import { useDropdownState } from "@web/core/dropdown/dropdown_hooks";
-import { deserializeDateTime } from "@web/core/l10n/dates";
-import { _t } from "@web/core/l10n/translation";
-import { registry } from "@web/core/registry";
-import { useService } from "@web/core/utils/hooks";
+import {Component, onWillDestroy, useExternalListener, useState} from "@odoo/owl";
+import {Dropdown} from "@web/core/dropdown/dropdown";
+import {useDropdownState} from "@web/core/dropdown/dropdown_hooks";
+import {deserializeDateTime} from "@web/core/l10n/dates";
+import {_t} from "@web/core/l10n/translation";
+import {registry} from "@web/core/registry";
+import {useService} from "@web/core/utils/hooks";
 
-const { DateTime } = luxon;
+const {DateTime} = luxon;
 
 const TIMER_CHANGED = "hr_timesheet_time_control_systray.timer_changed";
 
@@ -22,7 +22,7 @@ const TIMER_CHANGED = "hr_timesheet_time_control_systray.timer_changed";
  * every screen and makes stopping reachable from all of them.
  */
 export class TimesheetTimerSystray extends Component {
-    static components = { Dropdown };
+    static components = {Dropdown};
     static props = [];
     static template = "hr_timesheet_time_control_systray.TimesheetTimerSystray";
 
@@ -70,7 +70,11 @@ export class TimesheetTimerSystray extends Component {
     }
 
     async load() {
-        const data = await this.orm.call("account.analytic.line", "get_running_timer", []);
+        const data = await this.orm.call(
+            "account.analytic.line",
+            "get_running_timer",
+            []
+        );
         this.state.enabled = data.enabled;
         if (!data.enabled) {
             this.state.timer = false;
@@ -133,7 +137,7 @@ export class TimesheetTimerSystray extends Component {
         }
         this.dropdown.close();
         await this.load();
-        this.notification.add(_t("Timer stopped."), { type: "success" });
+        this.notification.add(_t("Timer stopped."), {type: "success"});
         // Any form on screen computed its Start/Stop button before this, so
         // without a reload a repair order would keep offering to stop a timer
         // that is already stopped.
@@ -169,7 +173,7 @@ export class TimesheetTimerSystray extends Component {
     }
 
     async reloadCurrentView() {
-        await this.action.doAction({ type: "ir.actions.client", tag: "soft_reload" });
+        await this.action.doAction({type: "ir.actions.client", tag: "soft_reload"});
     }
 }
 
