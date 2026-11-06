@@ -17,7 +17,7 @@ dependencies = [
     # >>> odoo-nix: install set (managed from modules.txt) >>>
     "odoo",
     "packaging",
-    "odoo-addon-project_timesheet_time_control",
+    "odoo-addon-hr_timesheet_time_control_systray",
     # <<< odoo-nix: install set <<<
 ]
 
@@ -26,7 +26,6 @@ dependencies = [
 # relock leaves this block alone.
 dev = [
     "debugpy",
-    "ruff",
     # Odoo's --dev=reload watcher needs a filesystem watcher it does not declare.
     "watchdog",
     # Odoo's test runner imports freezegun, and browser tours need
@@ -46,6 +45,7 @@ constraint-dependencies = ["setuptools<81"]
 [tool.uv.sources]
 # >>> odoo-nix: module sources (managed) >>>
     odoo = { path = "../.odoo-nix/odoo" }
+    "odoo-addon-hr_timesheet_time_control_systray" = { path = "../hr_timesheet_time_control_systray", editable = true }
     "odoo-addon-project_administrator_restricted_visibility" = { path = "../.odoo-nix/modules/project/project_administrator_restricted_visibility" }
     "odoo-addon-project_budget" = { path = "../.odoo-nix/modules/project/project_budget" }
     "odoo-addon-project_crm_postsale_automation" = { path = "../.odoo-nix/modules/project/project_crm_postsale_automation" }
@@ -134,9 +134,15 @@ packages = []
 # >>> odoo-nix: sdist build deps (managed) >>>
 "docopt" = ["setuptools"]
 "odoo" = ["setuptools"]
-"odoo-addon-project-timesheet-time-control" = ["setuptools"]
 "ofxparse" = ["setuptools"]
 "python-ldap" = ["setuptools"]
 "rjsmin" = ["setuptools"]
 "vobject" = ["setuptools"]
 # <<< odoo-nix: sdist build deps (managed) <<<
+
+[tool.odoo-nix]
+schema = 1
+profile = "github:Avunu/odoo-standards-profile/v1"
+
+[tool.odoo-nix.icons]
+src-icon = "assets/icons/timesheet-addons.png"
