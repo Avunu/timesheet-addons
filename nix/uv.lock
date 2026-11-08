@@ -1669,7 +1669,7 @@ provides-extras = ["ldap"]
 
 [[package]]
 name = "odoo-addon-hr-timesheet-time-control-systray"
-version = "18.0.1.0.0.3"
+version = "18.0.1.0.0.4"
 source = { editable = "../hr_timesheet_time_control_systray" }
 dependencies = [
     { name = "odoo" },
